@@ -16,9 +16,9 @@ class PracticeD3 extends React.Component {
     componentDidMount() {                         
         d3.select(this.refs.mySvg)
             .append("circle")
-            .attr("cx", 25)
-            .attr("cy", 25)
-            .attr("r", 25)
+            .attr("cx", 50)
+            .attr("cy", 50)
+            .attr("r", 50)
         const temperatureData = [8,5,13,9,12];
         d3.select(this.refs.temperatures)
             .selectAll("h2")
