@@ -5,7 +5,7 @@
    "name": "hellomynamenick",
    "children": [
     {
-     "name": "cluster",
+     "name": "mynamestillnick",
      "children": [
       {"name": "AgglomerativeCluster", "value": 3938},
       {"name": "CommunityStructure", "value": 3812},
