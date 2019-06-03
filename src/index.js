@@ -5,8 +5,9 @@ import Chart from './Calc';
 import PracticeD3 from './PracticeD3';
 import BarChart from './PracticeD3';
 import * as serviceWorker from './serviceWorker';
+import TestSunburst from './TestSunburst';
 
-ReactDOM.render(<PracticeD3 />, document.getElementById('root'));
+ReactDOM.render(<TestSunburst />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
