@@ -5,7 +5,11 @@
    "name": "hellomynamenick",
    "children": [
     {
+<<<<<<< HEAD
      "name": "cluster",
+=======
+     "name": "mynamestillnick",
+>>>>>>> 7e6636dad9eecb8954fac23c70de7df5e71a8312
      "children": [
       {"name": "AgglomerativeCluster", "value": 3938},
       {"name": "CommunityStructure", "value": 3812},
@@ -377,4 +381,8 @@
    ]
   }
  ]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7e6636dad9eecb8954fac23c70de7df5e71a8312
