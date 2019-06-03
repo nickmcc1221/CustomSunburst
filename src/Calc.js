@@ -1,3 +1,19 @@
+import React from 'react';
+import BarChart from './BarChart';
+import './calcStyle.css';
+
+class Chart extends React.Component {
+    render() {
+        return (
+            <div>
+                <div>
+                    <BarChart data={[5,10,1,3,4,5,1,3,7,18]} size={[500,500]} />
+                </div>
+            </div>
+        );
+    }
+}
+
 class Calc extends React.Component {
     constructor(props) {
         super(props);
@@ -150,4 +166,4 @@ class Calc extends React.Component {
     }
 }
 
-export default Chart;
+export default Calc;

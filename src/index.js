@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Game from './Game';
 import Calc from './Calc';
 import Chart from './Calc';
-import TestChart from './TestChart';
 import PracticeD3 from './PracticeD3';
+import BarChart from './PracticeD3';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<PracticeD3 />, document.getElementById('root'));
