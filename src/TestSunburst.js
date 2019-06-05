@@ -13,6 +13,8 @@ class TestSunburst extends React.Component {
     }
 
     createSunburst() {
+
+        //imports the JSON file that contains all of the data displayed on the sunburst
         var data = require("/mnt/c/Users/aiuhjc9/git/test/testapp/src/myJSON.json");
         var partition = data => {
             const root = d3.hierarchy(data[0])
@@ -22,8 +24,14 @@ class TestSunburst extends React.Component {
                 .size([2 * Math.PI, root.height + 1])
                 (root);
         };
+
+        //Color scheme for sunburst
         var color = d3.scaleOrdinal(d3.quantize(d3.interpolateCool, data[0].children.length + 1));
+
+        //number format
         var format = d3.format(",d");
+        
+        //Sizing for sunburst
         var width = 700;
         var radius = width / 6;
         var arc = d3.arc()
@@ -39,6 +47,7 @@ class TestSunburst extends React.Component {
 
         root.each(d => d.current = d);
         
+        //set up svg that will hold the sunburst
         const svg = d3.select("#packSVG")
             .attr("viewBox", [0, 0, width, width])
             .style("font", "10px sans-serif");
@@ -46,13 +55,17 @@ class TestSunburst extends React.Component {
         const g = svg.append("g")
             .attr("transform", `translate(${width / 2},${width / 2})`);
         
+        //This represents the 'slices' of the sunburst. All of their custimozations are done here with attributes
         const path = g.append("g")
             .selectAll("path")
             .data(root.descendants().slice(1))
             .join("path")
             .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
-            //.attr("fill", d => "black")
+
+            //Slices with children appear darker in color with more opacity
             .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
+
+            //These mouse events 'highlights' the section of the sunburst that the cursor is currently over by changing opacity
             .on("mouseover", function(d) {
                 d3.select(this).attr("fill-opacity", d => arcVisible(d.current) ? 1.0 : 0);
             })
@@ -68,6 +81,7 @@ class TestSunburst extends React.Component {
         path.append("title")
             .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
         
+        //Represents the labels on the slices of the sunburst. Custimozations done here for text on the sunburst
         const label = g.append("g")
             .attr("pointer-events", "none")
             .attr("text-anchor", "middle")
@@ -81,6 +95,7 @@ class TestSunburst extends React.Component {
             .attr("transform", d => labelTransform(d.current))
             .text(d => d.data.name);
         
+        //Represents the center circle that allows for backtracking through the sunburst. Customization done here for the center of the diagram
         const parent = g.append("circle")
             .datum(root)
             .attr("r", radius)
@@ -94,6 +109,7 @@ class TestSunburst extends React.Component {
             .attr("pointer-events", "all")
             .on("click", clicked);
         
+        //Function handles when you click on a slice
         function clicked(p) {
             parent.datum(p.parent || root);
         
@@ -127,14 +143,17 @@ class TestSunburst extends React.Component {
                 .attrTween("transform", d => () => labelTransform(d.current));
         }
         
+        //Checks if slice is currently displayed
         function arcVisible(d) {
             return d.y1 <= 3 && d.y0 >= 1 && d.x1 > d.x0;
         }
         
+        //Checks if label is currently displayed
         function labelVisible(d) {
             return d.y1 <= 3 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.03;
         }
         
+        //Rotates label to be oriented with its slice
         function labelTransform(d) {
             const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
             const y = (d.y0 + d.y1) / 2 * radius;
