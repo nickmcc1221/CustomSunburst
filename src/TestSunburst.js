@@ -25,7 +25,7 @@ class TestSunburst extends React.Component {
         };
 
         //Color scheme for sunburst
-        var color = d3.scaleOrdinal(d3.quantize(d3.interpolateCool, data[0].children.length + 1));
+        var color = d3.scaleOrdinal(d3.quantize(d3.interpolateGreens, data[0].children.length + 1));
 
         //number format
         var format = d3.format(",d");
@@ -49,7 +49,8 @@ class TestSunburst extends React.Component {
         //set up svg that will hold the sunburst
         const svg = d3.select("#packSVG")
             .attr("viewBox", [0, 0, width, width])
-            .style("font", "10px sans-serif");
+            .style("font", "10px sans-serif")
+            .style("background-color", "black");
         
         const g = svg.append("g")
             .attr("transform", `translate(${width / 2},${width / 2})`);
@@ -71,7 +72,7 @@ class TestSunburst extends React.Component {
             .on("mouseout", function(d) {
                 d3.select(this).attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
             })
-            
+
             .attr("d", d => arc(d.current));
         
         path.filter(d => d.children)
