@@ -163,7 +163,7 @@ class TestSunburst extends React.Component {
     render() {
         return (
             <div className="App">
-                <svg id="packSVG"></svg>
+                <svg id="packSVG" width="1500" height="900"></svg>
             </div>
         );
     }
