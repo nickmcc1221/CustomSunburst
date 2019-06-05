@@ -1,7 +1,6 @@
 import React from 'react';
 import Excel, { Workbook } from 'exceljs';
 import * as d3 from "d3";
-import stdlib from "@observablehq/stdlib";
 
 class TestSunburst extends React.Component {
     componentDidMount() {
