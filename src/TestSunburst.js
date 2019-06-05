@@ -71,6 +71,7 @@ class TestSunburst extends React.Component {
             .on("mouseout", function(d) {
                 d3.select(this).attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
             })
+            
             .attr("d", d => arc(d.current));
         
         path.filter(d => d.children)
@@ -99,12 +100,16 @@ class TestSunburst extends React.Component {
             .datum(root)
             .attr("r", radius)
             .attr("fill", "none")
-            //.on("mouseover", function() {
-            //     d3.select(this).attr("fill", "darkgray")
-            // })
-            // .on("mouseout", function() {
-            //     d3.select(this).attr("fill", "lightgray")
-            // })
+
+            //Adds hightlight on hover, has opacity so animation can be seen through it
+            .on("mouseover", function() {
+                d3.select(this).attr("fill", "darkgray")
+                    .attr("fill-opacity", 0.5)
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill", "none")
+            })
+
             .attr("pointer-events", "all")
             .on("click", clicked);
         
