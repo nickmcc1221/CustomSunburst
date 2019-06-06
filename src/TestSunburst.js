@@ -14,17 +14,14 @@ class TestSunburst extends React.Component {
     createSunburst() {
 
         //Read in XLSX and convert to JSON
-        let workbook = new Excel.Workbook();
-        const book = [];
-        var filename = require("/mnt/c/Users/aiuhjc9/git/test/testapp/src/testbook.xlsx");
-        workbook.xlsx.readFile(filename)
+        var workbook = new Excel.Workbook();
+        workbook.xlsx.readFile("mnt/c/Users/aiuhjc9/git/test/testapp/src/testbook.xlsx")   
             .then(function() {
                 var worksheet = workbook.getWorksheet("Sheet1");
                 worksheet.eachRow({ includeEmpty: true }, function(row, rowNumber) {
                     console.log("Row" + rowNumber + " = " + JSON.stringify(row.values));
                 });
             });
-        console.log(book);
 
         //imports the JSON file that contains all of the data displayed on the sunburst
         var data = require("/mnt/c/Users/aiuhjc9/git/test/testapp/src/myJSON.json");
