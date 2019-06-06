@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Calc from './Calc';
-import Chart from './Calc';
-import PracticeD3 from './PracticeD3';
-import BarChart from './PracticeD3';
 import * as serviceWorker from './serviceWorker';
 import TestSunburst from './TestSunburst';
+import CollapsibleTree from './CollapsibleTree';
+import Icicle from './Icicle';
 
-ReactDOM.render(<TestSunburst />, document.getElementById('root'));
+ReactDOM.render(<CollapsibleTree />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
