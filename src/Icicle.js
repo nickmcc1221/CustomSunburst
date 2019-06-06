@@ -19,7 +19,7 @@ class Icicle extends React.Component {
         var color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data[0].children.length + 1));
         var format = d3.format(",d");
         var width = 975;
-        var height = 1200;
+        var height = 600;
 
         const root = partition(data);
         let focus = root;

@@ -5,7 +5,7 @@ import TestSunburst from './TestSunburst';
 import CollapsibleTree from './CollapsibleTree';
 import Icicle from './Icicle';
 
-ReactDOM.render(<CollapsibleTree />, document.getElementById('root'));
+ReactDOM.render(<Icicle />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
