@@ -1,29 +1,38 @@
 import React from 'react';
 import * as Excel from 'exceljs';
+import readXlsxFile from 'read-excel-file';
 import * as d3 from "d3";
 
 class TestSunburst extends React.Component {
-    componentDidMount() {
-        this.createSunburst();
-    }
 
-    componentDidUpdate() {
-        this.createSunburst();
-    }
+    createSunburst(selectedFile) {
 
-    createSunburst() {
+        //Remove the upload button
+        d3.select("#inputForm").remove();
 
         //Read in XLSX and convert to JSON
-        var workbook = new Excel.Workbook();
-        workbook.xlsx.readFile("mnt/c/Users/aiuhjc9/git/test/testapp/src/testbook.xlsx")   
-            .then(function() {
-                var worksheet = workbook.getWorksheet("Sheet1");
-                worksheet.eachRow({ includeEmpty: true }, function(row, rowNumber) {
-                    console.log("Row" + rowNumber + " = " + JSON.stringify(row.values));
-                });
-            });
+        readXlsxFile(selectedFile[0]).then((rows) => {
+            console.log(rows[1][0]);
 
-        //imports the JSON file that contains all of the data displayed on the sunburst
+            //This loop reads the rows and stores the information into lineItem objects, and they are all stored in one large array
+            var allLineItems = [];
+            for (var i = 1; i <= rows.length; i++) {
+                console.log(rows[1][0]);
+                var lineItem = {
+                    SKU: rows[i][0],
+                    desc: rows[i][1],
+                    businessLine: rows[i][2],
+                    category: rows[i][3],
+                    subCategory: rows[i][4],
+                    industryCut: rows[i][5]
+                };
+                allLineItems.push(lineItem);
+            }
+            console.log(allLineItems);
+
+        });
+
+        //imports the JSON file that contains all of the data to be displayed on the sunburst
         var data = require("/mnt/c/Users/aiuhjc9/git/test/testapp/src/myJSON.json");
         var partition = data => {
             const root = d3.hierarchy(data[0])
@@ -179,6 +188,13 @@ class TestSunburst extends React.Component {
     render() {
         return (
             <div className="App">
+                <form id="inputForm">
+                    <label>
+                        Upload file:
+                        <input type="file" onChange={ (e) => this.createSunburst(e.target.files)} />
+                    </label>
+                    <br/>
+                </form>
                 <svg id="packSVG" width="1500" height="900"></svg>
             </div>
         );
