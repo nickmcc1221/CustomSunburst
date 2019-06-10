@@ -138,7 +138,7 @@ class TestSunburst extends React.Component {
                     var newSKU = {
                         name: allLineItems[i].SKU,
                         children: [],
-                        value: 20
+                        value: 1
                     };
                     allSKUs.push(newSKU);
 
@@ -163,13 +163,13 @@ class TestSunburst extends React.Component {
             };
 
             //Color scheme for sunburst
-            var color = d3.scaleOrdinal(d3.quantize(d3.interpolateCool, data.children.length + 1));
+            var color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1));
 
             //number format
             var format = d3.format(",d");
             
             //Sizing for sunburst
-            var width = 1000;
+            var width = 1200;
             var radius = width / 6;
             var arc = d3.arc()
                 .startAngle(d => d.x0)
@@ -207,7 +207,7 @@ class TestSunburst extends React.Component {
                     d3.select(this).attr("fill-opacity", d => arcVisible(d.current) ? 1.0 : 0);
                 })
                 .on("mouseout", function(d) {
-                    d3.select(this).attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
+                    d3.select(this).attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0);
                 })
 
                 .attr("d", d => arc(d.current));
