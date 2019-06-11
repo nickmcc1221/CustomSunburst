@@ -30,6 +30,7 @@ class TestSunburst extends React.Component {
                 name: "base",
                 children: []
             };
+
             //Populate this array with all of the business lines that will represent the first layer of the hierarchy
             var allBusinessLines = [];
             for (var i = 0; i < allLineItems.length; i++) {
@@ -41,6 +42,8 @@ class TestSunburst extends React.Component {
                         children: []
                     };
                     allBusinessLines.push(newBusinessLine);
+
+                    //Make this a child of 'base' layer
                     data.children.push(newBusinessLine);
                 }
             }
@@ -70,7 +73,7 @@ class TestSunburst extends React.Component {
             var allSubCategories = [];
             for (var i = 0; i < allLineItems.length; i++) {
 
-                //Only execute once for each category
+                //Only execute once for each sub-category
                 if (this.checkUniqueItemName(allSubCategories, allLineItems[i].subCategory)) {
                     var newSubCategory = {
                         name: allLineItems[i].subCategory,
@@ -91,7 +94,7 @@ class TestSunburst extends React.Component {
             var allIndustryCuts = [];
             for (var i = 0; i < allLineItems.length; i++) {
 
-                //Only execute once for each category
+                //Only execute once for each industry cut
                 if (this.checkUniqueItemName(allIndustryCuts, allLineItems[i].industryCut)) {
                     var newIndustryCut = {
                         name: allLineItems[i].industryCut,
@@ -112,7 +115,7 @@ class TestSunburst extends React.Component {
             var allDescs = [];
             for (var i = 0; i < allLineItems.length; i++) {
 
-                //Only execute once for each category
+                //Only execute once for each description
                 if (this.checkUniqueItemName(allDescs, allLineItems[i].desc)) {
                     var newDesc = {
                         name: allLineItems[i].desc,
@@ -133,7 +136,7 @@ class TestSunburst extends React.Component {
             var allSKUs = [];
             for (var i = 0; i < allLineItems.length; i++) {
 
-                //Only execute once for each category
+                //Only execute once for each SKU
                 if (this.checkUniqueItemName(allSKUs, allLineItems[i].SKU)) {
                     var newSKU = {
                         name: allLineItems[i].SKU,
@@ -153,6 +156,8 @@ class TestSunburst extends React.Component {
 
             //imports the JSON file that contains all of the data to be displayed on the sunburst
             //var data = require("/mnt/c/Users/aiuhjc9/git/test/testapp/src/myJSON.json");
+
+            //partition array of data into a hierarchy that's readable by the sunburst
             var partition = data => {
                 const root = d3.hierarchy(data)
                     .sum(d => d.value)
@@ -202,7 +207,7 @@ class TestSunburst extends React.Component {
                 //Slices with children appear darker in color with more opacity
                 .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
 
-                //These mouse events 'highlights' the section of the sunburst that the cursor is currently over by changing opacity
+                //These mouse events 'highlight' the section of the sunburst that the cursor is currently over by changing opacity
                 .on("mouseover", function(d) {
                     d3.select(this).attr("fill-opacity", d => arcVisible(d.current) ? 1.0 : 0);
                 })
@@ -304,6 +309,8 @@ class TestSunburst extends React.Component {
         });   
     }
 
+    //Takes an array and the name (String)
+    //Checks if any element of the array contains an element with a matching name property
     checkUniqueItemName(array, name) {
         for (var i = 0; i < array.length; i++) {
             if (array[i].name === name) {
@@ -313,6 +320,7 @@ class TestSunburst extends React.Component {
         return true;
     }
 
+    //Called to render onto the DOM. Has input form for file choosing and sets up SVG for sunburst
     render() {
         return (
             <div className="App">
