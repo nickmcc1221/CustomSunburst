@@ -236,7 +236,14 @@ class TestSunburst extends React.Component {
                 .attr("fill-opacity", d => +labelVisible(d.current))
                 .style("fill", "black")
                 .attr("transform", d => labelTransform(d.current))
-                .text(d => d.data.name);
+                //.text(d => d.data.name);
+                .text(function(d) {
+                    if (d.data.name.length) {
+                        return (d.data.name.substring(0,25));
+                    } else {
+                        return d.data.name;
+                    }
+                });
             
             //Represents the center circle that allows for backtracking through the sunburst. Customization done here for the center of the diagram
             const parent = g.append("circle")
