@@ -244,10 +244,10 @@ class TestSunburst extends React.Component {
                 .attr("r", radius)
                 .attr("fill", "none")
 
-                //Adds hightlight on hover, has opacity so animation can be seen through it
+                //Adds hightlight on hover, has low opacity so animation can be seen through it
                 // .on("mouseover", function() {
-                //     d3.select(this).attr("fill", "darkgray")
-                //         .attr("fill-opacity", 0.5)
+                //     d3.select(this).attr("fill", "black")
+                //         .attr("fill-opacity", 0.2)
                 // })
                 // .on("mouseout", function() {
                 //     d3.select(this).attr("fill", "none")
@@ -315,7 +315,7 @@ class TestSunburst extends React.Component {
         });   
     }
 
-    //Takes an array and the name (String)
+    //Takes an array and a name (String)
     //Checks if any element of the array contains an element with a matching name property
     checkUniqueItemName(array, name) {
         for (var i = 0; i < array.length; i++) {
