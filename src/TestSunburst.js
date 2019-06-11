@@ -258,6 +258,12 @@ class TestSunburst extends React.Component {
             
             //Function handles when you click on a slice
             function clicked(p) {
+
+                //do nothing if the slice isn't visible
+                if (d3.select(this).attr("fill-opacity") == 0) {
+                    return;
+                }
+
                 parent.datum(p.parent || root);
             
                 root.each(d => d.target = {
