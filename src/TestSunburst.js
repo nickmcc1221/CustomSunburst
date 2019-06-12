@@ -313,7 +313,7 @@ class TestSunburst extends React.Component {
                 return d.y1 <= 3 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.03;
             }
             
-            //Rotates label to be oriented with its slice
+            //Rotates label to be oriented and positioned with its slice
             function labelTransform(d) {
                 const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
                 const y = (d.y0 + d.y1) / 2 * radius;
@@ -342,7 +342,6 @@ class TestSunburst extends React.Component {
                         Upload file:
                         <input type="file" onChange={ (e) => this.createSunburst(e.target.files)} />
                     </label>
-                    <br/>
                 </form>
                 <svg id="packSVG" width="1500" height="900"></svg>
             </div>
